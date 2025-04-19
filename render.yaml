@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: bio-marketplace-backend
+    env: java
+    region: oregon
+    plan: starter
+    branch: main
+    buildCommand: "./mvnw clean package"
+    startCommand: "java -jar target/bio-marketplace-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: DATABASE_HOST
+        value: "ep-dawn-silence-a2k47s5e-pooler.eu-central-1.aws.neon.tech"
+      - key: DATABASE_PORT
+        value: "5432"
+      - key: DATABASE_NAME
+        value: "neondb"
+      - key: DATABASE_USERNAME
+        value: "neondb_owner"
+      - key: DATABASE_PASSWORD
+        value: "npg_lg7zwLNcB2iU"
+      - key: SPRING_PROFILES_ACTIVE
+        value: "dev"
+      - key: DO_ACCESS_KEY
+        value: "DO801DJ2DABTD6W9J3XG"
+      - key: DO_SECRET_KEY
+        value: "1oNqxYxY92z0aYzZcBfhRHjciXgPnwYiwy1m2OJ1hR8"
+      - key: DO_REGION
+        value: "fra1"
+      - key: DO_ENDPOINT
+        value: "https://fra1.digitaloceanspaces.com"
+      - key: JWT_AT_SECRET
+        value: "${JWT_AT_SECRET}"
+      - key: JWT_RT_SECRET
+        value: "${JWT_RT_SECRET}"
+      - key: MAIL_USERNAME
+        value: "${MAIL_USERNAME}"
+      - key: MAIL_PASSWORD
+        value: "${MAIL_PASSWORD}"

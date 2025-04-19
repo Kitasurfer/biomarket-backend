@@ -20,9 +20,11 @@
         </addColumn>
 
         <sql>
-            UPDATE product_image i
-            SET i.seller_id = (SELECT p.seller_id FROM product p WHERE p.id = i.product_id)
-            WHERE i.product_id IS NOT NULL;
+            UPDATE product_image
+            SET seller_id = (
+                SELECT p.seller_id FROM product p WHERE p.id = product_image.product_id
+            )
+            WHERE product_image.product_id IS NOT NULL;
         </sql>
 
         <dropNotNullConstraint tableName="product_image" columnName="product_id" columnDataType="BIGINT"/>

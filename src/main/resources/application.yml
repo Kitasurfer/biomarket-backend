@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?sslmode=require
+    driver-class-name: org.postgresql.Driver
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
@@ -10,13 +10,15 @@ spring:
     change-log: classpath:db/changelog/changelog-master.xml
 
   jpa:
+    hibernate:
+      ddl-auto: none
     properties:
       hibernate:
         auto_quote_keyword: true
 
   mail:
-    username: farmvibe.market@gmail.com
-    password: mjjtfougppduikve
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     host: smtp.gmail.com
     port: 587
     properties:
@@ -31,13 +33,18 @@ spring:
             trust: smtp.gmail.com
 
 app:
-  confirm-url-prefix: "https://farmvibe-app-2u9sj.ondigitalocean.app/api/confirm/"
+  confirm-url-prefix: "https://biomarket-front.netlify.app/api/confirm/"
 
 server:
   messages:
     hello: Hello from Bio-Marketplace application!
   servlet:
     context-path: /api
+    session:
+      cookie:
+        secure: true
+        http-only: true
+        same-site: None
 
 jwt:
   jwtAtSecret: ${JWT_AT_SECRET:3b4b2f2822144afa49ace61e650775809579816de5e6b170ff3911931fb717ed}
